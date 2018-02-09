@@ -1,0 +1,25 @@
+{% extends 'adjusters/base.html' %}
+{% block content %}
+<div id="header">
+<h2>Adjuster Portal</h2>
+</div>
+<div id="content">
+    <p>{{ adjuster_details.name }}</p>
+{% if adjuster_details.claim %}
+    <!-- MODIFY THESE BASED ON CLAIM MODEL -->
+    <ul>
+        <li>Account: {{ adjuster_details.claim.policy.Account.ID }}</li>
+        <li>Policy: {{ adjuster_details.claim.policy.ID }}</li>
+        <li>Driver: {{ adjuster_details.claim.driver.name }}</li>
+        <li>Vehicle: {{ adjuster_details.claim.vehicle.year }}, {{ adjuster_details.claim.vehicle.make }}, {{ adjuster_details.claim.vehicle.model }}</li>
+        <ul><p>Other Party Details</p>
+            <li>Name: {{ adjuster_details.claim.other_party_name }}</li>
+            <li>Vehicle: {{ adjuster_details.claim.other_party_vehicle }}</li>
+            <li>Insurance: {{ adjuster_details.claim.other_party_insurance }}</li>
+        </ul>
+    </ul>
+{% else %}
+    <p>No employees are in database.</p>
+{% endif %}
+</div>
+{% endblock %}

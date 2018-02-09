@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adjuster Portal</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+<div id="logo">
+    <img src="{% static 'img/sun.jpg' %}">
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
+</div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
