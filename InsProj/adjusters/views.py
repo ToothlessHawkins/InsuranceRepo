@@ -11,6 +11,7 @@ def home(request):
     adjuster_details = Adjuster.objects.get(pk=user.username)
     return render(request, 'adjusters/home.html', {'adjuster_details': adjuster_details})
 
+
 # def case_feedback(request, e_num):
 #     employee = get_object_or_404(Employee, number=e_num)
 #     job_list = Job.objects.filter(employee__number=e_num)

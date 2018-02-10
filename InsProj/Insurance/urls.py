@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .adjusters import urls
+from adjusters import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('adjuster/', include('adjusters.urls')),
+
 ]
