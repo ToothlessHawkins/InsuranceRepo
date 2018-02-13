@@ -18,10 +18,13 @@ from django.urls import path, include
 from adjusters import urls
 from documents import urls
 from service import urls
+from make_claims import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('adjuster/', include('adjusters.urls')),
     path('documents/', include('documents.urls')),
     path('service/', include('service.urls')),
+    path('claims/', include('make_claims.urls')),
+    path('discounts/', include('Discounts.urls')),
 ]
