@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse
 from Authenticate.forms import SignUpFOrm,LoginForm
 from django.contrib.auth import authenticate,login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import Group,Permission, User
 
 customer_group,created = Group.objects.get_or_create(name = 'Customer')
@@ -35,6 +36,12 @@ def logIn(request):
                 login(request,user)
                 if user.groups.filter(name='Customer').exists():
                     return HttpResponse('see your payments')
+                elif user.groups.filter(name='Adjuster').exists():
+                    return HttpResponseRedirect(reverse('adjusters:home'))
+                elif user.groups.filter(name='ServiceRep').exists():
+                    return HttpResponseRedirect(reverse('service:home'))
+                else:
+                    return HttpResponse('This user is not associated with a group (Customer, Adjuster, or ServiceRep).')
             else:
                 return HttpResponse('given credentials doesn\'t match.please enter valid credentials.')
 

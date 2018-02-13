@@ -15,10 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from adjusters import urls
-from documents import urls
-from service import urls
-from make_claims import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +23,6 @@ urlpatterns = [
     path('service/', include('service.urls')),
     path('claims/', include('make_claims.urls')),
     path('discounts/', include('Discounts.urls')),
+    path('authentication/', include('Authenticate.urls')),
+    # path('home/',),
 ]

@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'home',
     'policies',
     'service',
-    # authenticate
+    'Authenticate',
 ]
 
 MIDDLEWARE = [
