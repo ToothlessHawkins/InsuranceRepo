@@ -1,0 +1,13 @@
+{% extends 'adjusters/base.html' %}
+{% block content %}
+<div id="header">
+<h2>Documents</h2>
+</div>
+<div id="content">
+    <p>Select a Document</p>
+    <ul>
+        <li><a href ="{% url 'documents:billing_statements' %}">Billing Statements</a></li>
+        {# <li><a href ="{% url 'documents:claim_details' %}">Claim Details</a></li> #}
+    </ul>
+</div>
+{% endblock %}

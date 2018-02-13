@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+class AdjusterAdmin(admin.ModelAdmin):
+    list_display = ['name', 'username']
+admin.site.register(models.Adjuster, AdjusterAdmin)

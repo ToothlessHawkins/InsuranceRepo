@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Request, Mechanic, ServiceRep
+
+admin.site.register(Request)
+admin.site.register(Mechanic)
+admin.site.register(ServiceRep)

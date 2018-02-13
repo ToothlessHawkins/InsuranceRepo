@@ -1,0 +1,42 @@
+{% extends 'adjusters/base.html' %}
+{% block content %}
+<div id="header">
+<h2>Service</h2>
+</div>
+<div id="content">
+    <p>On-call Mechanics</p>
+    {% if mechanics_set %}
+    <table style='width:50%'>
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Current Job</th>
+    </tr>
+        {% for mechanic in mechanics_set %}
+            <tr>
+                <td>{{ mechanic.name}}</td>
+                <td>{{ mechanic.phone }}</td>
+                {% if mechanic.job %}
+                    <td><a href="{% url 'service:request_details' mechanic.job_id %}">{{ mechanic.job }}</a></td>
+                {% else %}
+                    <td>{{ mechanic.job }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>There are no mechanics in the database.</p>
+    {% endif %}
+
+    {% if request_set %}
+    <ul>
+        {% for request in request_set %}
+        <li><a href="{% url 'service:request_details' request.id %}">{{ request.date }},</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>There are no requests in the database.</p>
+    {% endif %}
+    <p><a href="{% url 'service:newRequest' %}">Make a Request</a></p>
+</div>
+{% endblock %}

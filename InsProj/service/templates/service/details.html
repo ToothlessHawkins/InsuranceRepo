@@ -1,0 +1,17 @@
+{% extends 'adjusters/base.html' %}
+{% block content %}
+<div id="header">
+    <h2>Request View</h2>
+    <p><a href="{% url 'service:home' %}">Home</a></p>
+</div>
+<div id="content">
+    <p>Request Date: {{ request.date }}</p>
+    <p>Location: {{ request.location }}</p>
+    <p>Description: {{ request.description }}</p>
+    <p>Mechanic: {{ request.mechanic }}</p>
+</div>
+<form action="{% url 'service:complete_request' request.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn" value="Mark Complete" name="mybtn">
+</form>
+{% endblock %}
