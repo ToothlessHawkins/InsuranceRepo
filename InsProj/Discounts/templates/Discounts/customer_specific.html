@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Specific Discounts</title>
+</head>
+<body>
+{% for dis in discounts %}
+    <br>
+    {{ dis.Discount_Name }}
+    <br>
+    {{ dis.Cupon_Code }}
+{% endfor %}
+</body>
+</html>

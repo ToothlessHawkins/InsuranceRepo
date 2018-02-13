@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Claim</title>
+</head>
+<body>
+{% block content %}
+    <div class="main">
+        <p>&#187; <a href="">All Claims</a> &#187; Post Update</p>
+
+        <h3>Create Claim</h3>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ claim.as_table }}
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Create Claim"></td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+{% endblock %}
+
+</body>
+</html>
