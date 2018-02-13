@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Payment Page </title>
+</head>
+<h1> Payment </h1>
+<body>
+<form method="POST">
+    <div>
+        <label> What is your user name? </label>
+        <input type="text" class="form-control" name="user_name">
+    </div>
+    <div>
+        <label> How much do you want to pay? </label>
+        <input type="number" class="form-control" name="payment">
+    </div>
+    <div>
+        <button type="submit" class="save btn btn-default"> Submit </button>
+        <a href="{% url 'payment_confirmation' %}">Submit Payment</a>
+    </div>
+</form>
+</body>
+</html>
