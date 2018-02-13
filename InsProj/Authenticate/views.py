@@ -33,7 +33,8 @@ def logIn(request):
             user = authenticate(request,username=username,password = password)
             if user is not None:
                 login(request,user)
-                return HttpResponse('see your payments')
+                if user.groups.filter(name='Customer').exists():
+                    return HttpResponse('see your payments')
             else:
                 return HttpResponse('given credentials doesn\'t match.please enter valid credentials.')
 
