@@ -23,6 +23,3 @@ class Claims(models.Model):
     Other_party_Phone_Number = models.CharField(max_length=100)
     Claim_Resolved_Date = models.DateField(blank=True,null=True)
     Description = models.CharField(max_length=3000)
-
-
-

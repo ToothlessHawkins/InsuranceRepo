@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'adjusters',
-    'authentication',
-    'claims',
-    'discounts',
+    'make_claims',
+    'Discounts',
     'documents',
     'home',
     'policies',
     'service',
+    # authenticate
 ]
 
 MIDDLEWARE = [

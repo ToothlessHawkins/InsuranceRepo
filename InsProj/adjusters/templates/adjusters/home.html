@@ -4,21 +4,23 @@
 <h2>Adjuster Portal</h2>
 </div>
 <div id="content">
-    <p>{{ adjuster_details.name }}</p>
+    <h3>{{ adjuster_details.name }}</h3>
     {% if current_case %}
-        <p>Policy Number: {{ current_case.Policy_Number }}</p>
-        <p>Date of Claim: {{ current_case.Claim_Date }}</p>
+        {# <p>Policy Number: {{ current_case.Policy_Number }}</p> #}
+        <p>Date of Claim: {{ current_case.Claimed_Date }}</p>
         <p>Other Party Details:</p>
-        <p>Name: {{ current_case.Other_party_Name }}</p>
-        <p>Insurance Company: {{ current_case.Other_party_Insurance_company_Name }}</p>
-        <p>Policy Number: {{ current_case.Other_party_policy_Number }}</p>
-        <p>Phone Number:{{ current_case.Other_party_Phone_Number }}</p>
+        <ul>
+            <li>Name: {{ current_case.Other_party_Name }}</li>
+            <li>Insurance Company: {{ current_case.Other_party_Insurance_company_Name }}</li>
+            <li>Policy Number: {{ current_case.Other_party_policy_Number }}</li>
+            <li>Phone Number:{{ current_case.Other_party_Phone_Number }}</li>
+        </ul>
+        <form action="{% url 'adjusters:complete_case' current_case.Claim_Id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn" value="Mark Complete" name="mybtn">
+        </form>
     {% else %}
         <p>You are not assigned to a claim.</p>
     {% endif %}
 </div>
-<form action="{% url 'jobs:complete_claim' current_case.Claim_Id %}" method="post">
-    {% csrf_token %}
-    <input type="submit" class="btn" value="Mark Complete" name="mybtn">
-</form>
 {% endblock %}
