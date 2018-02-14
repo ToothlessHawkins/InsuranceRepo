@@ -1,17 +1,16 @@
 from django.db import models
 
-"""IMPORT MODELs FROM APPs HERE"""
-# from policies.models import Policy
-# from accounts.models import Vehicle, Driver
+from policies.models import Policy
+from accounts.models import Vehicle, Driver
 
 class Request(models.Model):
-    # policy = models.ForeignKey('Policy', related_name='policy', on_delete=models.CASCADE,)
-    # vehicle = models.ForeignKey('Vehicle', related_name='vehicle', on_delete=models.CASCADE,)
-    # driver = models.ForeignKey('Driver', related_name='driver', on_delete=models.CASCADE,)
+    policy = models.ForeignKey('policies.Policy', related_name='policy', on_delete=models.SET_NULL,)
+    vehicle = models.ForeignKey('accounts.Vehicle', related_name='vehicle', on_delete=models.SET_NULL,)
+    driver = models.ForeignKey('accounts.Driver', related_name='driver', on_delete=models.SET_NULL,)
     location = models.TextField()
     date = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=250)
-    mechanic = models.ForeignKey('Mechanic', related_name='mechanic', on_delete=models.CASCADE, null=True, blank=True)
+    mechanic = models.ForeignKey('Mechanic', related_name='mechanic', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return str(self.date)
