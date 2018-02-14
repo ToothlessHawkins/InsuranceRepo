@@ -9,6 +9,7 @@
 <body>
 <div id="logo">
     <img src="{% static 'img/sun.jpg' %}">
+    <a href="{% url 'Authenticate:logout' %}">logout</a>
 </div>
 {% block content %}
 {% endblock %}
