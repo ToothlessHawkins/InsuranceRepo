@@ -7,32 +7,30 @@
 <body>
 {% block content %}
     <div class="main">
-        <p>&#187; <a href="">All Claims</a> &#187; Post Update</p>
-
         <h3>Claim Details</h3>
 
         <form action="" method="GET">
             {% csrf_token %}
             <table>
-                {{ claim.Claim_Id }}
+                Claim Id: {{ claim.Claim_Id }}
                 <br>
-                {{ claim.Drivers_Liscene_Number }}
+                Driver's Liscence: {{ claim.Drivers_Liscene_Number }}
                 <br>
-                {{ claim.VIN }}
+                VIN: {{ claim.VIN }}
                 <br>
-                {{ claim.Policy_Number }}
+                Policy Number: {{ claim.Policy_Number }}
                 <br>
-                {{ claim.Claimed_Date }}
+                Claimed Date: {{ claim.Claimed_Date }}
                 <br>
-                {{ claim.Description }}
+                Claim Description: {{ claim.Description }}
+                <h3>OTHER PARTY DETAILS:</h3>
+                Name: {{ claim.Other_party_Name}}
                 <br>
-                {{ claim.Other_party_Name}}
+                Phone Number: {{ claim.Other_party_Phone_Number }}
                 <br>
-                {{ claim.Other_party_Phone_Number }}
+                Insurance company Name: {{ claim.Other_party_Insurance_company_Name }}
                 <br>
-                {{ claim.Other_party_Insurance_company_Name }}
-                <br>
-                {{ claim.Other_party_policy_Number }}
+                Policy Number: {{ claim.Other_party_policy_Number }}
                 <br>
 
             </table>

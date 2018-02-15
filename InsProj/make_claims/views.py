@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from make_claims.models import Claims
 
 
+
 # Create your views here.
 
 
@@ -36,4 +37,14 @@ def edit_claim(request,Claim_Id):
     else:
         claim_data = ClaimForm(instance=claim)
         return render(request,'claims/editclaim.html',{'claim':claim_data})
+
+def main_claim(request):
+    claim_obj = Claims.objects.all()
+    return render(request,'claims/claim_page.html',{'claim_id':claim_obj})
+
+def view_status(request,Claim_Id):
+    claim_staus = Claims.objects.get(Claim_Id=Claim_Id)
+    status =claim_staus.Status
+    return render(request,'claims/viewstatus.html',{'status':status})
+
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Claims Page</title>
+</head>
+<body>
+<form>
+<input type="button" value="Make Claim" onclick="window.location.href='http://localhost:8000/claims/create/'" />
+<select onchange="location = this.options[this.selectedIndex].value;">
+    <option>View Claim</option>
+    {% for c in claim_id %}
+    <option value="http://localhost:8000/claims/view/{{ c.Claim_Id }}/">{{ c.Claim_Id }}</option>
+{% endfor %}
+</select>​
+<select onchange="location = this.options[this.selectedIndex].value;">
+    <option>Edit Claim</option>
+    {% for c in claim_id %}
+    <option value="http://localhost:8000/claims/edit/{{ c.Claim_Id }}/">{{ c.Claim_Id }}</option>
+{% endfor %}
+</select>​
+<select onchange="location = this.options[this.selectedIndex].value;">
+    <option>View Claim Status</option>
+    {% for c in claim_id %}
+    <option value="http://localhost:8000/claims/status/{{ c.Claim_Id }}/">{{ c.Claim_Id }}</option>
+{% endfor %}
+</select>​
+</form>
+</body>
+</html>
+
