@@ -5,6 +5,7 @@ import datetime
 
 from .models import Adjuster
 from make_claims.models import Claims
+from .forms import statusForm
 
 """AUTHENTICATION"""
 from django.contrib.auth.decorators import user_passes_test
@@ -16,10 +17,19 @@ def not_adjuster(user):
 @user_passes_test(not_adjuster, login_url='Authenticate:login')
 def home(request):
     adjuster_details = Adjuster.objects.get(pk=request.user.username)
-    current_case = None
+    current_case, form = None, None
     if adjuster_details.claim:
         current_case = Claims.objects.get(pk=adjuster_details.claim.Claim_Id)
-    return render(request, 'adjusters/home.html', {'adjuster_details':adjuster_details,'current_case': current_case})
+        if request.method == 'POST':
+            form = statusForm(request.POST)
+            if form.is_valid():
+                claimStatus = form.cleaned_data['claimStatus']
+                current_case.Status = claimStatus
+                current_case.save()
+                return redirect('adjusters:home')
+        else:
+            form = statusForm()
+    return render(request, 'adjusters/home.html', {'adjuster_details':adjuster_details,'current_case': current_case, 'form':form})
 
 @user_passes_test(not_adjuster, login_url='Authenticate:login')
 def complete_case(request, Claim_Id):

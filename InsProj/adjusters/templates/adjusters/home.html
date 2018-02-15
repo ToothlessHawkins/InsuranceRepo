@@ -15,9 +15,18 @@
             <li>Policy Number: {{ current_case.Other_party_policy_Number }}</li>
             <li>Phone Number:{{ current_case.Other_party_Phone_Number }}</li>
         </ul>
+
+
+        <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+
+
         <form action="{% url 'adjusters:complete_case' current_case.Claim_Id %}" method="post">
         {% csrf_token %}
-        <input type="submit" class="btn" value="Mark Complete" name="mybtn">
+            <p><input type="submit" class="btn" value="Mark Complete" name="mybtn"></p>
         </form>
     {% else %}
         <p>You are not assigned to a claim.</p>
