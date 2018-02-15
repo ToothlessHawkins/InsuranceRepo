@@ -30,7 +30,7 @@ def request_policy(request):
         form = policyForm(request.POST)
         if form.is_valid():
             policy_num = form.cleaned_data['policyNum']
-            chosenPolicy = get_object_or_404('policy', Policy_Number=policy_num)
+            chosenPolicy = get_object_or_404(policy, Policy_Number=policy_num)
             return redirect('service:newRequest', policy=chosenPolicy)
     else:
         form = policyForm()
