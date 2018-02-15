@@ -1,11 +1,11 @@
 from django.db import models
 
-from policies.models import Policy
-from accounts.models import Account
+from policies.models import policy
+from accounts.models import account
 
 class Transaction(models.Model):
-    policy = models.ForeignKey('policies.Policy', related_name='policy', on_delete=models.SET_NULL,)
-    account = models.ForeignKey('accounts.Account', related_name='account', on_delete=models.SET_NULL,)
+    policy = models.ForeignKey('policies.policy', related_name='transaction_policy', on_delete=models.SET_NULL, null=True, blank=True)
+    account = models.ForeignKey('accounts.account', related_name='transaction_account', on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField(auto_now=True)
     PriorBalance = models.IntegerField()
     NewBalance = models.IntegerField()

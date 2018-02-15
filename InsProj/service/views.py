@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Mechanic, Request, ServiceRep
-from .forms import requestForm
+from .forms import requestForm, policyForm
+from policies.models import policy
 
 """AUTHENTICATION"""
 from django.contrib.auth.decorators import user_passes_test
@@ -24,11 +25,24 @@ def request_details(request, req_id):
     return render(request, 'service/details.html', {'request': req})
 
 @user_passes_test(not_serviceRep, login_url='Authenticate:login')
-def newRequest(request):
+def request_policy(request):
+    if request.method == 'POST':
+        form = policyForm(request.POST)
+        if form.is_valid():
+            policy_num = form.cleaned_data['policyNum']
+            chosenPolicy = get_object_or_404('policy', Policy_Number=policy_num)
+            return redirect('service:newRequest', policy=chosenPolicy)
+    else:
+        form = policyForm()
+    return render(request, 'service/request.html', {'form':form})
+
+@user_passes_test(not_serviceRep, login_url='Authenticate:login')
+def newRequest(request, inPolicy):
     if request.method == 'POST':
         form = requestForm(request.POST)
         if form.is_valid():
             req = form.save(commit=False)
+            req.policy = inPolicy
             req.save()
             # assign mechanic to job and job to mechanic here
             chosenMech = Mechanic.objects.get(id=req.mechanic.id)
@@ -37,8 +51,9 @@ def newRequest(request):
             return redirect('service:request_details', req_id=req.id)
     else:
         form = requestForm()
-        """Use this to make sure the vehicles and drivers the user sees are only valid ones?"""
-        # form.fields["employee"].queryset = Employee.objects.filter(department__name='Site_Survey')
+        """Use this to make sure the vehicles and drivers the user sees are only valid ones"""
+        # form.fields["driver"].queryset = driver.objects.filter(account=inPolicy.account)
+        # form.fields["vehicle"].queryset = vehicle.objects.filter(account=inPolicy.account)
         form.fields['mechanic'].queryset = Mechanic.objects.filter(job=None)
     return render(request, 'service/request.html', {'form':form})
 

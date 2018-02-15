@@ -1,12 +1,12 @@
 from django.db import models
 
-from policies.models import Policy
-from accounts.models import Vehicle, Driver
+from policies.models import policy
+from accounts.models import driver#, vehicle
 
 class Request(models.Model):
-    policy = models.ForeignKey('policies.Policy', related_name='policy', on_delete=models.SET_NULL,)
-    vehicle = models.ForeignKey('accounts.Vehicle', related_name='vehicle', on_delete=models.SET_NULL,)
-    driver = models.ForeignKey('accounts.Driver', related_name='driver', on_delete=models.SET_NULL,)
+    policy = models.ForeignKey('policies.Policy', related_name='policy', on_delete=models.SET_NULL, null=True, blank=True)
+    # vehicle = models.ForeignKey('accounts.Vehicle', related_name='vehicle', on_delete=models.SET_NULL,)
+    driver = models.ForeignKey('accounts.Driver', related_name='driver', on_delete=models.SET_NULL, null=True, blank=True)
     location = models.TextField()
     date = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=250)
