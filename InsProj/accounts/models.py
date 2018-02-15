@@ -7,7 +7,6 @@ from django.db import models
 class account(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    account_id = models.IntegerField(auto_created=True, default="0", null=True)
     corporation = models.CharField(max_length=50)
     billing_address = models.CharField(max_length=50)
     phone_number = models.BigIntegerField()
@@ -41,3 +40,74 @@ class driver(models.Model):
 
     def __str__(self):
         return "{}".format(self.user_name)
+
+class vehicle(models.Model):
+    MODEL_OPTIONS = (
+        ('T', 'Toyota'),
+        ('N', 'Nissan'),
+        ('F', 'Ford'),
+        ('VB', 'Volkswagon Beetle'),
+        ('J', 'Jeep'),
+        ('C', 'Chrysler'),
+        ('CH', 'Chevrolet'),
+        ('AU', 'Audi'),
+        ('AM', 'Aston Martin'),
+        ('AC', 'Acura'),
+        ('B', 'BMW'),
+        ('CD', 'Cadillac'),
+        ('CR', 'Corvette'),
+        ('D', 'Dodge'),
+        ('G', 'GMC'),
+        ('HN', 'Honda'),
+        ('HY', 'Hyundai'),
+        ('HM', 'Hummer'),
+        ('IS', 'Isuzu'),
+        ('IN', 'Infiniti'),
+        ('JG', 'Jaguar'),
+        ('LM', 'Lamborghini'),
+        ('LR', 'Landrover'),
+        ('LN', 'Lincoln'),
+    )
+    car_model = models.CharField(max_length=50, choices=MODEL_OPTIONS)
+    CENTURY = (
+        ('20th Century', '1900-1999'),
+        ('21th Century', '2000-2099'),
+    )
+    year_of_purchase = models.CharField(max_length=12, choices=CENTURY)
+    COLOR_OPTIONS = (
+        ('R', 'Red'),
+        ('BL', 'Blue'),
+        ('G', 'Green'),
+        ('WH', 'White'),
+        ('G', 'Grey'),
+        ('BLK', 'Black'),
+        ('P', 'Pink'),
+        ('PR', 'Purple'),
+        ('Y', 'Yellow'),
+    )
+    car_color = models.CharField(max_length=10, choices=COLOR_OPTIONS)
+    CONDITION_OPTIONS = (
+        ('G', 'Good Condition'),
+        ('NG', 'Not So Good Condition'),
+        ('B', 'Bad Condition'),
+        ('T', 'Totaled'),
+    )
+    car_condition = models.CharField(max_length=50, choices=CONDITION_OPTIONS)
+    car_condition_details = models.TextField(max_length=100, blank=True, null=True)
+    RANGE_OPTIONS = (
+        ('LOW', '0-10000'),
+        ('NORMAL', '10000-50000'),
+        ('HIGH', '50000-100000'),
+    )
+    car_mileage = models.CharField(max_length=20, choices=RANGE_OPTIONS)
+    vehicle_num = models.CharField(max_length=17, primary_key=True, unique=True)
+    purchase_date = models.DateField()
+    YEAR_RANGE = (
+        ('LOW', '0-100'),
+        ('NORMAL', '100-200'),
+        ('HIGH', '200-300'),
+    )
+    miles_per_year = models.CharField(max_length=10, choices=YEAR_RANGE)
+
+    def __str__(self):
+        return "{}".format(self.car_model)

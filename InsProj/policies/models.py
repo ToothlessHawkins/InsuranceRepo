@@ -6,8 +6,8 @@ from accounts.models import account
 
 # Create your models here.
 class policy(models.Model):
-    user_name = models.OneToOneField(account, on_delete=models.CASCADE, primary_key=True, default="")
-    account_id = models.OneToOneField(account, related_name="userid", on_delete=models.SET_NULL, null=True)
+    user_name = models.OneToOneField(account, on_delete=models.CASCADE)
+    policy_id = models.AutoField(primary_key=True)
     POLICY_CHOICES = (
         ('LC', 'Liability Coverage'),
         ('CC', 'Collision Coverage'),
@@ -24,7 +24,7 @@ class policy(models.Model):
         ('M', 'Monthly'),
         ('W', 'Weekly'),
     )
-    payment_plan = models.CharField(max_length=1, choices=PLAN_OPTIONS)
+    payment_plan = models.CharField(max_length=10, choices=PLAN_OPTIONS, default='Yearly')
     payment_due_date = models.DateTimeField()
     payment = models.PositiveSmallIntegerField(default=0)
     actual_date_of_payment = models.DateTimeField()

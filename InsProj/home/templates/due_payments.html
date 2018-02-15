@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Due Payments Page</title>
 </head>
+<h1> {{username.user_name}}, These Are Your Due Payments </h1>
 <body>
-
+    {% for details in username %}
+     <div>
+         {{ details.due_payments }}
+     </div>
+    {% endfor %}
 </body>
 </html>

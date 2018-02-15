@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <title>On Time Payments</title>
 </head>
-<h1>{{username.user_name}}, This is a List of On Time Payments</h1>
+<h1>{{username.user_name}}, This is a List of your On Time Payments</h1>
 <body>
-
+     <div>
+       {% if username.payment_due_date.isoformat() == username.actual_payment_date.isoformat() %}
+       <p> {{ username.actual_payment_date }} : On Time </p>
+       {% endif %}
+     </div>
+     <div>
+       {% if username.payment_due_date.isoformat() >= username.actual_payment_date.isoformat() %}
+       <p> {{ username.actual_payment_date }} : Early Bird </p>
+       {% endif %}
+     </div>
+     <div>
+       {% if username.payment_due_date.isoformat() <= username.actual_payment_date.isoformat() %}
+       <p> {{ username.actual_payment_date }} : Late </p>
+       {% endif %}
+     </div>
 </body>
 </html>
