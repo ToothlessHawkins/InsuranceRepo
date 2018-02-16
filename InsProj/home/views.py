@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from policies.models import policy
 from accounts.models import account
 from django.http import HttpResponseRedirect
-from .homes_forms import MakePaymentForm
+from .forms import MakePaymentForm
 from django.urls import reverse
 
 # Create your views here.
@@ -38,4 +38,5 @@ def on_time_payments(request, pk):
 
 def due_payments(request, pk):
     username = policy.objects.get(pk=pk)
+    username.points += 1
     return render(request, 'due_payments', {'username' : username})

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+# from policies.models import policy
 
 # Create your models here.
 class account(models.Model):
@@ -12,14 +13,15 @@ class account(models.Model):
     phone_number = models.BigIntegerField()
     email_address = models.EmailField()
     user_name = models.CharField(max_length=50, unique=True)
+    active_policy = models.CharField(max_length=500, default="Uninsured/Underinsured Motorist Coverage")
 
     def __str__(self):
         return "{}".format(self.user_name)
 
 class driver(models.Model):
-    first_name = models.ForeignKey(account, related_name="firstname", on_delete=models.SET_NULL, null=True)
-    last_name = models.ForeignKey(account, related_name="lastname", on_delete=models.SET_NULL, null=True)
-    user_name = models.ForeignKey(account, related_name="username", on_delete=models.SET_NULL, null=True)
+    first_name = models.CharField(max_length=50, default="")
+    last_name = models.CharField(max_length=50, default="")
+    # user_name = models.ForeignKey(account, related_name="username", on_delete=models.SET_NULL, null=True)
     suffix = models.CharField(max_length=50)
     license_plate_num = models.CharField(max_length=7)
     GENDER_CHOICES = (
@@ -39,9 +41,10 @@ class driver(models.Model):
     num_of_collisions = models.IntegerField(default=0)
 
     def __str__(self):
-        return "{}".format(self.user_name)
+        return "{}".format(self.first_name)
 
 class vehicle(models.Model):
+    user_name = models.ForeignKey(account, related_name="Username", on_delete=models.SET_NULL, null=True)
     MODEL_OPTIONS = (
         ('T', 'Toyota'),
         ('N', 'Nissan'),
@@ -73,7 +76,7 @@ class vehicle(models.Model):
         ('20th Century', '1900-1999'),
         ('21th Century', '2000-2099'),
     )
-    year_of_purchase = models.CharField(max_length=12, choices=CENTURY)
+    year_of_purchase = models.CharField(max_length=50, choices=CENTURY)
     COLOR_OPTIONS = (
         ('R', 'Red'),
         ('BL', 'Blue'),

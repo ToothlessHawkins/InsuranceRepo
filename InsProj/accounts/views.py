@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
-from .models import account
-from .accounts_form import AccountsForm, DriverForm, VehicleForm
+from .models import account, driver, vehicle
+from .forms import AccountsForm, DriverForm, VehicleForm
 
 # Create your views here.
 def create_account(request):
@@ -35,6 +35,10 @@ def fill_driver_details(request):
 
     return render(request,'fill_driver_details.html', {'form':form})
 
+def view_driver_details(request, user_name):
+    driver_info = driver.objects.get(user_name=user_name)
+    return render(request, 'view_driver_details.html', {'driver_info':driver_info})
+
 def fill_vehicle_details(request):
     if request.method == 'POST':
         form = VehicleForm(request.POST)
@@ -46,6 +50,10 @@ def fill_vehicle_details(request):
         form = VehicleForm()
 
     return render(request,'fill_vehicle_details.html', {'form':form})
+
+def view_vehicle_details(request, user_name):
+    vehicle_info = vehicle.objects.get(user_name=user_name)
+    return render(request, 'view_vehicle_details.html', {'vehicle_info':vehicle_info})
 
 def account_confirmation(request):
     return render(request, 'account_confirmation.html', {})
