@@ -6,10 +6,8 @@
 </head>
 <h1> {{username.user_name}}, These Are Your Due Payments </h1>
 <body>
-    {% for details in username %}
      <div>
-         {{ details.due_payments }}
+         <p>{{ username.due_payments }}</p>
      </div>
-    {% endfor %}
 </body>
 </html>

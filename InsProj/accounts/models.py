@@ -42,6 +42,7 @@ class driver(models.Model):
         return "{}".format(self.user_name)
 
 class vehicle(models.Model):
+    user_name = models.ForeignKey(account, related_name="Username", on_delete=models.SET_NULL, null=True)
     MODEL_OPTIONS = (
         ('T', 'Toyota'),
         ('N', 'Nissan'),
