@@ -57,7 +57,7 @@
     }
 
     .button4 {
-              background-color: black;
+              background-color: gold;
               color: white;
               padding: 15px 32px;
               font-size: 16px
@@ -72,8 +72,42 @@
            box-shadow: 0 5px #666;
            transform: translateY(4px);
     }
+
+    .button5 {
+              background-color: black;
+              color: white;
+              padding: 15px 32px;
+              font-size: 16px
+             }
+
+    .button5:hover {
+           background-color: #3e8e41;
+    }
+
+    .button5:active {
+           background-color: #3e8e41;
+           box-shadow: 0 5px #666;
+           transform: translateY(4px);
+    }
+
+    .button6 {
+              background-color: grey;
+              color: white;
+              padding: 15px 32px;
+              font-size: 16px
+             }
+
+    .button6:hover {
+           background-color: #3e8e41;
+    }
+
+    .button6:active {
+           background-color: #3e8e41;
+           box-shadow: 0 5px #666;
+           transform: translateY(4px);
+    }
 </style>
-<h1> Welcome Back, {{username.user_name}} </h1>
+<h1> Welcome Back</h1>
 <body>
    <div>
        <p> What Would You like To Do Today? </p>
@@ -92,6 +126,14 @@
 
    <div class="view_payment_history_button">
     <button class="button4">Payment History</button>
+   </div>
+
+    <div class="view_discounts_button">
+    <button class="button5">Discounts</button>
+   </div>
+
+    <div class="view_claims_button">
+    <button class="button6">Claims</button>
    </div>
 </body>
 </html>
