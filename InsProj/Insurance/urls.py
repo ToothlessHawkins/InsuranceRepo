@@ -25,5 +25,6 @@ urlpatterns = [
     path('claims/', include('make_claims.urls')),
     path('discounts/', include('Discounts.urls')),
     path('authentication/', include('Authenticate.urls')),
-    # path('home/',),
+    path('accounts/', include('accounts.urls')),
+    path('policies/', include('policies.urls')),
 ]

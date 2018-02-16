@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Insurance.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'car_insurance',
+        'NAME': 'car_insurance_corp',
         'USER': 'root',
         'PASSWORD': 'groot',
         'HOST': 'localhost',
