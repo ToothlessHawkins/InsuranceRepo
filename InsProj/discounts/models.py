@@ -1,5 +1,5 @@
 from django.db import models
-from make_claims.models import Policy
+from policies.models import policy
 
 # Create your models here.
 class General_Discounts(models.Model):
@@ -14,7 +14,7 @@ class Disconts_table(models.Model):
     Cupon_Code = models.CharField(max_length=10,primary_key=True)
 
 class Customer_Spcific_Discounts(models.Model):
-    Policy_Id = models.ForeignKey(Policy,on_delete=models.CASCADE)
+    Policy_Id = models.ForeignKey(policy,on_delete=models.CASCADE)
     Discount_Name = models.ForeignKey(Disconts_table,on_delete=models.CASCADE)
 
 

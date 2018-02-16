@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
 from Discounts.models import Disconts_table,Customer_Spcific_Discounts,General_Discounts
 from Discounts.forms import General_Disounts_Form,Discount_Table_Form
-from make_claims.models import Policy
+from policies.models import policy
+from django.contrib.auth.models import User
+from accounts.models import account
 # Create your views here.
 import string
 import random
@@ -9,11 +11,14 @@ def view_general_discounts(request):
     g_d = General_Discounts.objects.all()
     return render(request,'Discounts/view_general_discounts.html',{'discounts':g_d})
 
-def view_customer_specific_discounts(request,Policy_Id):
-    p_i = Policy.objects.get(Policy_id = Policy_Id)
+def view_customer_specific_discounts(request):
+    crnt_user = User.objects.get(username=request.user.username)
+    user = account.objects.get(user_name=crnt_user)
+    if crnt_user.groups.filter(name='Customer').exists():
+        p_i = policy.objects.get(user_name = user)
     #c_d = Customer_Spcific_Discounts.objects.get(Policy_Id = p_i)
-    p_r = Disconts_table.objects.filter(points_required__lte = p_i.points)
-    return render(request,'Discounts/customer_specific.html',{'discounts':p_r})
+        p_r = Disconts_table.objects.filter(points_required__lte = p_i.points)
+        return render(request,'Discounts/customer_specific.html',{'discounts':p_r,'points':p_i})
 
 def create_general_discounts(request):
     cupcode = ''.join([random.choice(string.ascii_uppercase+string.digits) for i in range(5)])
