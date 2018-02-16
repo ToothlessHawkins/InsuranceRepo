@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Driver Information</title>
+    <title>Policy Information</title>
 </head>
-<h1>Driver Details Required</h1>
+<h1>Policy Details Required</h1>
 <body>
    <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit"><a href="{% url 'fill_driver_details' %}">Submit Another</a></button>
+      <button type="submit"><a href="{% url 'fill_policy_details' %}">Submit Another</a></button>
       <input type="submit" value="Submit and Done"/>
    </form>
 </body>

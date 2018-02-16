@@ -2,15 +2,14 @@ DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{policy_info.user_name}}'s Policy Details</title>
+    <title>{{policy_info.first_name}}'s Policy Details</title>
 </head>
-<h1>{{policy_info.user_name}}'s Policy Info </h1>
+<h1>{{policy_info.first_name}}'s Policy Info </h1>
 <body>
-     <p>User Name: {{policy_info.user_name}}</p>
+     <p>Policy ID: {{policy_info.policy_id}}</p>
      <p>Policy Plan: {{policy_info.policy_plan}}</p>
-     <p>Payment Due Date: {{policy_info.payment_due_date}}</p>
      <p>Prenium Rate: {{policy_info.total_rate}}</p>
-     <p>Points: {{policy_info.points}}</p>
+     <p>Payment Due Date: {{policy_info.payment_due_date}}</p>
      <p>Suspended: {{policy_info.suspended}}</p>
 </body>
 </html>

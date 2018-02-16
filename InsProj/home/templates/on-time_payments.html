@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>On Time Payments</title>
 </head>
-<h1>{{username.user_name}}, This is a List of your On Time Payments</h1>
+<h1>{{username.account}}, This is a List of your On Time Payments</h1>
 <body>
      <div>
        {% if username.payment_due_date.isoformat() == username.actual_payment_date.isoformat() %}

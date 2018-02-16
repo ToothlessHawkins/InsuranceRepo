@@ -22,8 +22,8 @@ class driver(models.Model):
     first_name = models.CharField(max_length=50, default="")
     last_name = models.CharField(max_length=50, default="")
     # user_name = models.ForeignKey(account, related_name="username", on_delete=models.SET_NULL, null=True)
-    suffix = models.CharField(max_length=50)
-    license_plate_num = models.CharField(max_length=7)
+    suffix = models.CharField(max_length=50, blank=True, null=True)
+    driver_license_number = models.CharField(max_length=7)
     GENDER_CHOICES = (
         ('m', 'Male'),
         ('f', 'Female'),
@@ -44,7 +44,7 @@ class driver(models.Model):
         return "{}".format(self.first_name)
 
 class vehicle(models.Model):
-    user_name = models.ForeignKey(account, related_name="Username", on_delete=models.SET_NULL, null=True)
+    account = models.ForeignKey(account, related_name="Account", on_delete=models.SET_NULL, null=True)
     MODEL_OPTIONS = (
         ('T', 'Toyota'),
         ('N', 'Nissan'),
