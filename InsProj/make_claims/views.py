@@ -7,7 +7,7 @@ from make_claims.models import Claims
 from django.contrib.auth.models import User
 from accounts.models import account
 from policies.models import policy
-
+from adjusters.models import Adjuster
 
 
 
@@ -21,11 +21,26 @@ def create_claim(request):
         if claim_data.is_valid():
             data = claim_data.save(commit=False)
             data.Claim_Id = c_id
-            data.save()
-            return HttpResponse("Your claim is created.\nYour claim ID is: {}".format(data.Claim_Id))
+            user = User.objects.get(username=request.user.username)
+            if user.groups.filter(name='Customer').exists():
+                data.Policy = policy.objects.get(user_name=account.objects.get(user_name=user))
+            adjuster_availability = Adjuster.objects.filter(claim = None)
+            if len(adjuster_availability) != 0:
+                data.Adjuster_obj = adjuster_availability[0].pk
+                data.save()
+                claim_obj = Claims.objects.get(Claim_Id = c_id)
+                ad_obj = Adjuster.objects.get(username=data.Adjuster_obj)
+                ad_obj.claim = claim_obj
+                ad_obj.save()
+                return render(request,'claims/claim_creation.html',{'claim_id':data.Claim_Id,'adjuster':ad_obj.name})
+            else:
+                data.save()
+                claim_obj = Claims.objects.get(Claim_Id=c_id)
+                return HttpResponse("your claim is created. your claim id is : {}. your claim will be resolved as soon as possilbe".format(claim_obj.Claim_Id))
     else:
         claim_data = ClaimForm()
         return render(request,'claims/creating_claim.html',{'claim':claim_data})
+
 
 def view_claim(request,Claim_Id):
     if request.method == 'GET':
