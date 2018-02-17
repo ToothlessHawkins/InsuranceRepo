@@ -1,12 +1,12 @@
 from django import forms
-from policies.models import policy
+from home.models import make_payment
 
 class MakePaymentForm(forms.ModelForm):
 
     class Meta:
-        model = policy
+        model = make_payment
 
         fields = [
-            'user_name',
-            'payment',
+            'policy_id',
+            'payment_plan',
         ]
