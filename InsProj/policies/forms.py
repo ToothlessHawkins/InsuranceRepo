@@ -7,15 +7,6 @@ class PolicyForm(forms.Form):
         model = policy
 
         fields = [
-            'user_name',
-            'account_id',
-            'policy_plan',
-            'payments_made',
-            'total_rate',
+            'total_rate'
             'payment_plan',
-            'payment_due_date',
-            'payment',
-            'actual_date_of_payment',
-            'suspended',
-            'points',
         ]
