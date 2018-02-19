@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <title>Due Payments Page</title>
 </head>
-<h1> {{username.user_name}}, These Are Your Due Payments </h1>
+<h1> {{ currentUser }}, these Are Your Due Payments </h1>
 <body>
      <div>
-         <p>{{ username.due_payments }}</p>
+         <p>{% activePolicy.balance %}</p>
+         <p>{% activePolicy.payment_due_date %}</p>
+         {% if activePolicy.balance > 0 && due %}
+         <p>Would you like to make a payment now?</p>
+         <button type="button"><a href="{% url 'home:make_payment' %}">Make Payment</a></button>
+         {% endif %}
      </div>
 </body>
 </html>
