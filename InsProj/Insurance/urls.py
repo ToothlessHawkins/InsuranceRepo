@@ -1,4 +1,4 @@
-"""Insurance_Project URL Configuration
+"""Insurance URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('adjuster/', include('adjusters.urls')),
+    path('documents/', include('documents.urls')),
+    path('service/', include('service.urls')),
+    path('claims/', include('make_claims.urls')),
+    path('discounts/', include('Discounts.urls')),
     path('accounts/', include('accounts.urls')),
     path('policies/', include('policies.urls')),
     path('home/', include('home.urls')),
-    path('paypal/', include('paypal.standard.ipn.urls')),
+    path('', include('Authenticate.urls')),
 ]
