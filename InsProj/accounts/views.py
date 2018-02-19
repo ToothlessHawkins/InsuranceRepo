@@ -33,6 +33,8 @@ def fill_driver_details(request):
             driver = form.save(commit=False)
             driver.account = account.objects.get(user_name=request.user.username)
             driver.save()
+            if (request.POST.get('save_and_add_another')):
+                return HttpResponseRedirect(reverse('accounts:fill_driver_details'))
             return HttpResponseRedirect(reverse('accounts:fill_vehicle_details'))
     else:
         form = DriverForm()
@@ -50,6 +52,8 @@ def fill_vehicle_details(request):
             vehicle = form.save(commit=False)
             vehicle.account = account.objects.get(user_name=request.user.username)
             vehicle.save()
+            if (request.POST.get('save_and_add_another')):
+                return HttpResponseRedirect(reverse('accounts:fill_vehicle_details'))
             return HttpResponseRedirect(reverse('accounts:account_confirmation'))
     else:
         form = VehicleForm()
