@@ -27,5 +27,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('policies/', include('policies.urls')),
     path('home/', include('home.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),
     path('', include('Authenticate.urls')),
 ]

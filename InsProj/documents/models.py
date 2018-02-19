@@ -11,3 +11,13 @@ class Transaction(models.Model):
     NewBalance = models.DecimalField(max_digits=8, decimal_places=2)
     Amount = models.DecimalField(max_digits=8, decimal_places=2)
 
+
+
+from documents.models import Transaction
+
+payment = Transaction()
+payment.t_policy = activePolicy
+payment.t_account = currentAcc
+payment.PriorBalance = activePolicy.balance
+payment.NewBalance = 0
+payment.Amount = activePolicy.balance
