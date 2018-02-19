@@ -19,9 +19,9 @@ class policy(models.Model):
     # policy_plan = models.CharField(max_length=100, choices=POLICY_CHOICES)
     payments_made = models.IntegerField(default=0)
     PRICE_OPTIONS = (
-        ('12000.00', 'Full'),
-        ('6000.00', 'Half'),
-        ('3000.00', 'Liability'),
+        (12000.00, 'Full'),
+        (6000.00, 'Half'),
+        (3000.00, 'Liability'),
     )
     total_rate = models.DecimalField(max_digits=8, decimal_places=2, choices=PRICE_OPTIONS)
     PLAN_OPTIONS = (
@@ -29,7 +29,7 @@ class policy(models.Model):
         ('M', 'Monthly'),
         ('W', 'Weekly'),
     )
-    payment_plan = models.CharField(max_length=1, choices=PLAN_OPTIONS, default='Yearly')
+    payment_plan = models.CharField(max_length=1, choices=PLAN_OPTIONS)
     payment_due_date = models.DateField()
     balance = models.DecimalField(max_digits=8, decimal_places=2)
     # actual_date_of_payment = models.DateTimeField()

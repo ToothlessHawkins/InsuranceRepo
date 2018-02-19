@@ -5,6 +5,7 @@ from django.urls import reverse
 from .models import Mechanic, Request, ServiceRep
 from .forms import requestForm, policyForm
 from policies.models import policy
+from accounts.models import driver, vehicle
 
 """AUTHENTICATION"""
 from django.contrib.auth.decorators import user_passes_test
@@ -30,19 +31,20 @@ def request_policy(request):
         form = policyForm(request.POST)
         if form.is_valid():
             policy_num = form.cleaned_data['policyNum']
-            chosenPolicy = get_object_or_404(policy, Policy_Number=policy_num)
-            return redirect('service:newRequest', policy=chosenPolicy)
+            chosenPolicy = get_object_or_404(policy, policy_id=policy_num)
+            return redirect('service:newRequest', inPolicy=chosenPolicy.policy_id)
     else:
         form = policyForm()
     return render(request, 'service/request.html', {'form':form})
 
 @user_passes_test(not_serviceRep, login_url='Authenticate:login')
 def newRequest(request, inPolicy):
+    reqPolicy = policy.objects.get(policy_id=inPolicy)
     if request.method == 'POST':
         form = requestForm(request.POST)
         if form.is_valid():
             req = form.save(commit=False)
-            req.policy = inPolicy
+            req.policy = reqPolicy
             req.save()
             # assign mechanic to job and job to mechanic here
             chosenMech = Mechanic.objects.get(id=req.mechanic.id)
@@ -52,8 +54,8 @@ def newRequest(request, inPolicy):
     else:
         form = requestForm()
         """Use this to make sure the vehicles and drivers the user sees are only valid ones"""
-        # form.fields["driver"].queryset = driver.objects.filter(account=inPolicy.account)
-        # form.fields["vehicle"].queryset = vehicle.objects.filter(account=inPolicy.account)
+        form.fields["driver"].queryset = driver.objects.filter(account=reqPolicy.account)
+        form.fields['vehicle'].queryset = vehicle.objects.filter(account=reqPolicy.account)
         form.fields['mechanic'].queryset = Mechanic.objects.filter(job=None)
     return render(request, 'service/request.html', {'form':form})
 

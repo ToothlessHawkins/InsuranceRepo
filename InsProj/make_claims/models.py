@@ -1,11 +1,11 @@
 from django.db import models
 from policies.models import policy
+#from adjusters.models import Adjuster
 
 # Create your models here.
 
 class Claims(models.Model):
-    Policy = models.ForeignKey(policy,related_name="policy",on_delete=models.CASCADE)
-    Adjuster_obj = models.CharField(max_length=50,null=True,blank= True)
+    Policy = models.ForeignKey(policy, related_name="claims_policy",on_delete=models.SET_NULL, null=True, blank=True)
     Claimed_Date = models.DateField()
     Claim_Id = models.CharField(max_length=20,primary_key=True)
     Other_party_Name = models.CharField(max_length=100)
@@ -15,7 +15,7 @@ class Claims(models.Model):
     Claim_Resolved_Date = models.DateField(blank=True,null=True)
     Description = models.CharField(max_length=3000)
     Status = models.CharField(max_length= 500,blank=True,null=True)
+    #Adjuster_obj = models.ForeignKey(Adjuster,related_name="Adjuster",on_delete=models.CASCADE)
 
 
-# related_name="Adjuster_obj",
 

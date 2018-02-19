@@ -44,9 +44,9 @@ def claim_details(request):
     response['Content-Disposition'] = 'attachment; filename="Claims_History.csv"'
     writer = csv.writer(response)
     writer.writerow(['Claims', request.user.username, datetime.date.today])
-    writer.writerow(['Policy #', "Driver's License Number", 'VIN Number', 'Claim Date', 'Claim ID', 'Claim Resolved', 'Description'])
+    writer.writerow(['Policy #', "Driver", 'VIN Number', 'Claim Date', 'Claim ID', 'Claim Resolved', 'Description', 'Status'])
     # writer.writerow(['Claim Date', 'Claim ID', 'Claim Resolved', 'Description'])
     for claim in yourClaims:
-        writer.writerow([claim.Policy_Number, claim.Drivers_Liscene_Number, claim.VIN, claim.Claimed_Date, claim.Claim_Id, claim.Claim_Resolved_Date, claim.Description])
+        writer.writerow([claim.Policy.policy_id, str(claim.Driver.last_name + ', ' + claim.Driver.first_name), claim.Vehicle.vehicle_num, claim.Claimed_Date, claim.Claim_Id, claim.Claim_Resolved_Date, claim.Description, claim.Status])
         # writer.writerow([claim.Claimed_Date, claim.Claim_Id, claim.Claim_Resolved_Date, claim.Description])
     return response

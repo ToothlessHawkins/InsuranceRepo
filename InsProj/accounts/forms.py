@@ -7,13 +7,13 @@ class AccountsForm(forms.ModelForm):
         model = account
 
         fields = [
-            'first_name',
-            'last_name',
+            # 'first_name',
+            # 'last_name',
             'corporation',
             'billing_address',
             'phone_number',
-            'email_address',
-            'user_name',
+            # 'email_address',
+            # 'user_name',
         ]
 
 class DriverForm(forms.ModelForm):
@@ -25,7 +25,7 @@ class DriverForm(forms.ModelForm):
             'first_name',
             'last_name',
             'suffix',
-            'license_plate_num',
+            'driver_license_number',
             'gender',
             'active_driver',
             'driver_state_of_residence',

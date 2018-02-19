@@ -1,12 +1,8 @@
 from django import forms
-from policies.models import policy
+from .models import policy
 
-class PolicyForm(forms.Form):
+class PolicyForm(forms.ModelForm):
 
     class Meta:
         model = policy
-
-        fields = [
-            'total_rate'
-            'payment_plan',
-        ]
+        fields=('total_rate','payment_plan')

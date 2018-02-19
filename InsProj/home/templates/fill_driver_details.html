@@ -9,7 +9,7 @@
    <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit"><a href="{% url 'fill_driver_details' %}">Submit Another</a></button>
+      <button type="submit"><a href="{% url 'accounts:fill_driver_details' %}">Submit Another</a></button>
       <input type="submit" value="Submit and Done"/>
    </form>
 </body>

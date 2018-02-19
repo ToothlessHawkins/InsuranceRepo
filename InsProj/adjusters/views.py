@@ -43,10 +43,10 @@ def complete_case(request, Claim_Id):
         # remove the claim from the adjuster's claim field
         adjuster_details.claim = None
         """auto assign claim to adjuster here"""
-        # #get first claim in set of claims with no adjuster
-        # pendingClaim = Claims.objects.filter(adjuster=None)[0]
-        # #assign a pending claim, if there is one
-        # if pendingClaim:
-        #     adjuster_details.claim = pendingClaim
+        #get first claim in set of claims with no adjuster
+        pendingClaim = Claims.objects.filter(adjuster=None)[0]
+        #assign a pending claim, if there is one
+        if pendingClaim:
+            adjuster_details.claim = pendingClaim
         adjuster_details.save()
         return HttpResponseRedirect(reverse('adjusters:home'))

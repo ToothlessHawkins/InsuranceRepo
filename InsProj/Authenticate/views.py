@@ -15,11 +15,11 @@ def signUp(request):
             form.save()
             username = form.cleaned_data.get('username')
             pword = form.cleaned_data.get('password1')
-            user = authenticate(user_name =username,password = pword )
+            user = authenticate(user_name=username, password=pword)
             myuser = User.objects.get(username=username)
             myuser.groups.add(customer_group)
-            login(request,user)
-            return HttpResponse("Welcome")
+            login(request, myuser, backend='django.contrib.auth.backends.ModelBackend')
+            return HttpResponseRedirect(reverse('accounts:create_account'))
 
     else:
         form = SignUpFOrm()
@@ -33,9 +33,9 @@ def logIn(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request,username=username,password = password)
             if user is not None:
-                login(request,user)
+                login(request,user,backend='django.contrib.auth.backends.ModelBackend')
                 if user.groups.filter(name='Customer').exists():
-                    return HttpResponse('see your payments')
+                    return HttpResponseRedirect(reverse('home:customer_home_page', kwargs={'user_name': username}))
                 elif user.groups.filter(name='Adjuster').exists():
                     return HttpResponseRedirect(reverse('adjusters:home'))
                 elif user.groups.filter(name='ServiceRep').exists():
