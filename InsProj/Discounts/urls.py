@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.urls import path
 from Discounts.views import create_general_discounts,create_customer_discounts,view_customer_specific_discounts,view_general_discounts
 
+app_name='Discounts'
 urlpatterns = [
     url('create/general/discounts/',create_general_discounts,name = 'creategeneraldiscounts'),
     url('create/customer/discounts/',create_customer_discounts,name = 'createcustomerdiscounts'),

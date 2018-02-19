@@ -28,7 +28,7 @@ def create_general_discounts(request):
             temp = form.save(commit=False)
             temp.Cupon_Code = cupcode
             temp.save()
-            return redirect('creategeneraldiscounts')
+            return redirect('Discounts:creategeneraldiscounts')
 
     else:
         form = General_Disounts_Form()
@@ -43,7 +43,7 @@ def create_customer_discounts(request):
             temp = form.save(commit=False)
             temp.Cupon_Code = cupcode
             temp.save()
-            return redirect('createcustomerdiscounts')
+            return redirect('Discounts:createcustomerdiscounts')
 
     else:
         form = Discount_Table_Form()
