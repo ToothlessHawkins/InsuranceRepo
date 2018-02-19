@@ -23,7 +23,7 @@
     }
 
     .button2 {
-              background-color: blue;
+              background-color: pink;
               color: white;
               padding: 15px 32px;
               font-size: 16px;
@@ -107,33 +107,33 @@
            transform: translateY(4px);
     }
 </style>
-<h1> Welcome Back</h1>
+<h1> Welcome Back, {{ currentUser }}</h1>
 <body>
    <div>
        <p> What Would You like To Do Today? </p>
    </div>
    <div class="make_payment_button">
-       <button class="button1"><a href="{% url 'make_payment' %}">Make Payment</a></button>
+       <button class="button1"><a href="{% url 'home:make_payment' %}">Make Payment</a></button>
    </div>
 
    <div class="due_payment_button">
-       <button class="button2"><a href="{% url 'due_payments' %}">Due Payments</a></button>
+       <button class="button2"><a href="{% url 'home:due_payments' %}">Due Payments</a></button>
    </div>
 
    <div class="on-time_payment_button">
-       <button class="button3"><a hrf="{% url 'on_time_payments' %}">On-Time Payments</a></button>
+       <button class="button3"><a href="{% url 'home:on_time_payments' %}">On-Time Payments</a></button>
    </div>
 
    <div class="view_payment_history_button">
-       <button class="button4"><a href="{% url 'view_payment_history' %}">Payment History</a></button>
+       <button class="button4"><a href="{% url 'home:view_payment_history' %}">Payment History</a></button>
    </div>
 
     <div class="view_discounts_button">
-        <button class="button5"><a href="{% url '' %}">Discounts</a></button>
+        <button class="button5">Discounts</button>
    </div>
 
     <div class="view_claims_button">
-        <button class="button6"><a href="{% url '' %}">Claims</a></button>
+        <button class="button6">Claims</button>
    </div>
 </body>
 </html>
