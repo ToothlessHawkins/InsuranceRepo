@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.center {
+    margin-right: 50px;
+    margin-left: 500px;
+    height: 100px;
+    width: 20%;
+    border: 3px solid #73AD21;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+h3{
+    font-size: 1em; /* 30px/16=1.875em */
+ }
+body {
+    background-color: lightblue;
+}
+</style>
 <head>
     <meta charset="UTF-8">
     <title>claim Conformation</title>
 </head>
+
 <body>
+<div class="center">
+<h3>
 Your claim is created.
-<br>
+</h3>
+
 Your claim ID is: {{ claim_id }}
-<br>
+</h3>
+<h3>
+{% if "Your" in adjuster %}
+{{ adjuster }}
+{% else %}
 your claim will be handled by: {{ adjuster }}
+{% endif %}
+</h3>
+</div>
 </body>
+
 </html>

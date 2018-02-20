@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align:left;
+}
+
+h3{
+    font-size: 1.875em; /* 30px/16=1.875em */
+    text-align: left;
+ }
+.center {
+    text-align: center;
+    width: 25%;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 200px 1px;
+}
+body {
+    background-color: lightblue;
+}
+</style>
 <head>
     <meta charset="UTF-8">
     <title>View Claim</title>
 </head>
 <body>
 {% block content %}
-    <div class="main">
+    <div class="center">
         <h3>Claim Details</h3>
 
         <form action="" method="GET">
             {% csrf_token %}
-            <table>
-                Claim Id: {{ claim.Claim_Id }}
-                <br>
-                Policy Number: {{ claim.Policy.policy_id }}
-                <br>
-                Claimed Date: {{ claim.Claimed_Date }}
-                <br>
-                Claim Description: {{ claim.Description }}
-                <h3>OTHER PARTY DETAILS:</h3>
-                Name: {{ claim.Other_party_Name}}
-                <br>
-                Phone Number: {{ claim.Other_party_Phone_Number }}
-                <br>
-                Insurance company Name: {{ claim.Other_party_Insurance_company_Name }}
-                <br>
-                Policy Number: {{ claim.Other_party_policy_Number }}
-                <br>
+            <div>
+                <label>Claim Id:</label>{{ claim.Claim_Id }}<br>
+                <label>Policy Number:</label>{{ claim.Policy.policy_id }}<br>
+                <label>Claimed Date:</label>{{ claim.Claimed_Date }}<br>
+                <label>Claim Description:</label>{{ claim.Description }}<br>
+                <label>Claimed Date:</label>{{ claim.Claimed_Date }}<br>
+            </div>
 
-            </table>
+                <h3>  OTHER PARTY DETAILS:</h3>
+            <div>
+                <label>Name:</label>{{ claim.Other_party_Name}}<br>
+                <label>Phone Number:</label>{{ claim.Other_party_Phone_Number }}<br>
+                <label>Insurance company Name:</label>{{ claim.Other_party_Insurance_company_Name }}<br>
+                <label>Policy Number:</label>{{ claim.Other_party_policy_Number }}<br>
+
+            </div>
+
+
         </form>
 
     </div>

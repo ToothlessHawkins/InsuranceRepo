@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align:left;
+}
+
+h4{
+    font-size: 1em; /* 30px/16=1.875em */
+    text-align: left;
+ }
+.center {
+    text-align: center;
+    width: 25%;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 200px 1px;
+}
+body {
+    background-color: lightblue;
+}
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Customer Specific Discounts</title>
 </head>
 <body>
-<h4> Points gained by you so far: {{ points.points }} </h4>
-<h4>You are eligible to reedem any or all of the following discounts</h4>
-{% for dis in discounts %}
-    Points required to get this discount: {{ dis.points_required }}
-    <br>
-    Discount Name: {{ dis.Discount_Name }}
-    <br>
-    Cupon Code: {{ dis.Cupon_Code }}
-    <br><br>
-    {% endfor %}
+<div class="center">
+             <h4>Customer Discounts</h4>
+             <div>
+                <label>Points gained by you so far:</label>{{ points.points }}<br>
+                <h4>You are eligible to get the following discounts</h4>
+                {% for dis in discounts %}
+                     <label>Points required to get this discount:</label> {{ dis.points_required }}<br>
+                     <label>Discount Name:</label> {{ dis.Discount_Name }}<br>
+                     <label>Cupon Code:</label> {{ dis.Cupon_Code }}<br><br>
+                {% endfor %}
+             </div>
+</div>
 </body>
 </html>

@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+form {
+ width:100%;
+ height:100px;
+ margin:auto;
+ position:relative;
+ }
+   input {
+ width:100%;
+ height: 20px;
+ text-align:center;
+ color: black;
+   }
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 5px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+h3{
+    font-size: 1.875em; /* 30px/16=1.875em */
+ }
+.center {
+    text-align: center;
+    width: 25%;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 200px 1px;
+}
+body {
+    background-color: lightblue;
+}
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Create General Discounts</title>
 </head>
 <body>
 {% block content %}
-    <div class="main">
+    <div class="center">
 
         <h3>Create General Discounts</h3>
 
         <form action="" method="POST">
             {% csrf_token %}
             <table>
-                {{ form.as_table }}
+                {{ form.as_p }}
                 <tr>
                     <td></td>
                     <td><input type="submit" value="Create Customer Specific Discounts"></td>

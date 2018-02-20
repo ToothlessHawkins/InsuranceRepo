@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align:left;
+}
+
+h4{
+    font-size: 1em; /* 30px/16=1.875em */
+    text-align: left;
+ }
+.center {
+    text-align: center;
+    width: 25%;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 200px 1px;
+}
+body {
+    background-color: lightblue;
+}
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Genaral Discounts</title>
 </head>
 <body>
-{% for dis in discounts %}
-    <br>
-    Discount Name: {{ dis.Discount_Name }}
-    <br>
-    Discount Start Date: {{ dis.Start_Date }}
-    <br>
-    Discount End Date: {{ dis.End_Date }}
-    <br>
-    Cupon Code: {{ dis.Cupon_Code }}
-    <br>
-{% endfor %}
+<div class="center">
+<h4>General Discounts</h4>
+
+             <div>
+                {% for dis in discounts %}
+                     <label>Discount Name:</label> {{ dis.Discount_Name }}<br>
+                     <label>Discount Start Date:</label> {{ dis.Start_Date }}<br>
+                     <label>Discount End Date:</label> {{ dis.End_Date }}<br>
+                     <label>Cupon Code:</label> {{ dis.Cupon_Code }}<br><br>
+                {% endfor %}
+             </div>
+</div>
 </body>
 </html>
