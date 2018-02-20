@@ -13,7 +13,7 @@ class Request(models.Model):
     mechanic = models.ForeignKey('Mechanic', related_name='mechanic', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return str(self.date)
+        return 'Policy: ' + str(self.policy) + ' | ' + str(self.date.strftime('%I:%M %p; %m/%d/%y'))
 
 class Mechanic(models.Model):
     name = models.CharField(max_length=50)

@@ -5,7 +5,7 @@ label{
     display: inline-block;
     float: left;
     clear: left;
-    width: 250px;
+    width: 40%;
     text-align:left;
 }
 
@@ -18,13 +18,17 @@ ul {
     margin: 0;
     padding: 0;
 }
-
+p {
+    text-align: left;
+    width: 50%;
+    margin-left: 40%;
+}
 li {
     display: inline;
 }
 .center {
     text-align: center;
-    width: 25%;
+    width: 40%;
     display: table;
     margin-left: auto;
     margin-right: auto;
@@ -55,7 +59,7 @@ body {
                 <label>Claim Id:</label>{{ claim.Claim_Id }}<br>
                 <label>Policy Number:</label>{{ claim.Policy.policy_id }}<br>
                 <label>Claimed Date:</label>{{ claim.Claimed_Date }}<br>
-                <label>Claim Description:</label>{{ claim.Description }}<br>
+                <label>Claim Description:</label><p>{{ claim.Description }}</p><br>
                 <label>Claimed Date:</label>{{ claim.Claimed_Date }}<br>
             </div>
 

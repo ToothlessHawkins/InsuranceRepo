@@ -17,7 +17,7 @@ def not_serviceRep(user):
 @user_passes_test(not_serviceRep, login_url='Authenticate:login')
 def home(request):
     mechanics_set = Mechanic.objects.all()
-    request_set = Request.objects.all()
+    request_set = Request.objects.filter(mechanic=None)
     return render(request, 'service/home.html', {'mechanics_set': mechanics_set, 'request_set':request_set})
 
 @user_passes_test(not_serviceRep, login_url='Authenticate:login')
@@ -47,9 +47,10 @@ def newRequest(request, inPolicy):
             req.policy = reqPolicy
             req.save()
             # assign mechanic to job and job to mechanic here
-            chosenMech = Mechanic.objects.get(id=req.mechanic.id)
-            chosenMech.job = req
-            chosenMech.save()
+            if req.mechanic:
+                chosenMech = Mechanic.objects.get(id=req.mechanic.id)
+                chosenMech.job = req
+                chosenMech.save()
             return redirect('service:request_details', req_id=req.id)
     else:
         form = requestForm()
@@ -63,5 +64,12 @@ def newRequest(request, inPolicy):
 def complete_request(request, req_id):
     req = get_object_or_404(Request, pk=req_id)
     if (request.POST.get('mybtn')):
+        thisMech = req.mechanic
         req.delete()
+        latestrequest = Request.objects.filter(mechanic=None)
+        if latestrequest:
+            thisMech.job = latestrequest[0]
+            thisMech.save()
+            latestrequest[0].mechanic = thisMech
+            latestrequest[0].save()
         return HttpResponseRedirect(reverse('service:home'))

@@ -31,11 +31,11 @@
     {% if request_set %}
     <ul>
         {% for request in request_set %}
-        <li><a href="{% url 'service:request_details' request.id %}">{{ request.date }},</a></li>
+        <li><a href="{% url 'service:request_details' request.id %}">{{ request }}</a></li>
         {% endfor %}
     </ul>
     {% else %}
-        <p>There are no requests in the database.</p>
+        <p>There are no outstanding requests in the database.</p>
     {% endif %}
     <p><a href="{% url 'service:request_policy' %}">Make a Request</a></p>
 </div>
