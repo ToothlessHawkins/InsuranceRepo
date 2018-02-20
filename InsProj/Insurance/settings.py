@@ -133,5 +133,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-PAYPAL_RECIEVER_EMAIL = ''
-PAYPAL_TEST = ''
+PAYPAL_RECIEVER_EMAIL = 'jxj7701@gmail.com'
+PAYPAL_TEST = 'True'

@@ -9,20 +9,22 @@ from django.http import HttpResponseRedirect
 import datetime
 from django.urls import reverse
 from paypal.standard.forms import PayPalPaymentsForm
+from documents.models import Transaction
 
 # Create your views here.
 def customer_home_page(request):
     currentUser = request.user.username
-    # username = account.objects.get(user_name=user_name)
-    return render(request, 'home.html', {'currentUser' : currentUser})
+    mypolicyid = policy.objects.get(account=account.objects.get(user_name=currentUser)).policy_id
+    return render(request, 'home.html', {'currentUser' : currentUser, 'policy': mypolicyid})
 
 def view_payment_history(request, pk):
     username = get_object_or_404(policy, pk=pk)
     return render(request, 'payment_history.html', {'username' : username})
 
 def make_payment(request):
-    policy_id = request.session.get('policy_id')
-    policy_plan = get_object_or_404(policy, policy_id=policy_id)
+    # policy_id = request.session.get('policy_id')
+    mypolicyid = policy.objects.get(account=account.objects.get(user_name=request.user.username)).policy_id
+    policy_plan = get_object_or_404(policy, policy_id=mypolicyid)
     host = request.get_host()
 
     paypal_dict = {
@@ -43,6 +45,14 @@ def payment_confirmation(request):
     currentUser = request.user.username
     currentAcc = account.objects.get(user_name=currentUser)
     activePolicy = policy.objects.get(account=currentAcc)
+
+    payment = Transaction()
+    payment.t_policy = activePolicy
+    payment.t_account = currentAcc
+    payment.PriorBalance = activePolicy.balance
+    payment.NewBalance = 0
+    payment.Amount = activePolicy.balance
+
     activePolicy.points += 1
     #increment payments_made
     activePolicy.payments_made += 1
@@ -54,10 +64,14 @@ def payment_confirmation(request):
     totalPayments = 12 if policy.payment_plan == 'M' else 52 if policy.payment_plan == 'W' else 1
     # time = datetime.week if activePolicy.payment_plan == 'W' else datetime.month if activePolicy.payment_plan == 'M' else datetime.MAXYEAR
     if activePolicy.payments_made == totalPayments:
-        activePolicy.payments_made == 0
+        # stub for renewing policies
+        activePolicy.payments_made = 0
     else:
         activePolicy.balance = activePolicy.total_rate / totalPayments
-
+        time = datetime.timedelta(weeks=1) if activePolicy.payment_plan == 'W' \
+            else datetime.timedelta(weeks=4) if activePolicy.payment_plan == 'M' \
+            else datetime.timedelta(weeks=52)
+        activePolicy.payment_due_date += time
 
     return render(request, 'payment_confirmation.html', {'currentUser' : currentUser,
                                                          'currentAcc' : currentAcc,
@@ -65,10 +79,9 @@ def payment_confirmation(request):
 
 def on_time_payments(request):
     currentUser = request.user.username
-    currentAcc = account.object.get(user_name=currentUser)
+    currentAcc = account.objects.get(user_name=currentUser)
     activePolicy = policy.objects.get(account=currentAcc)
-    return render(request, 'on-time_payments', {'currentUser' : currentUser,
-                                                'activePolicy' : activePolicy,
+    return render(request, 'on-time_payments.html', {'currentUser' : currentUser,
                                                 'activePolicy' : activePolicy})
 
 def due_payments(request):

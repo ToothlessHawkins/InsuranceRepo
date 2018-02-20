@@ -7,9 +7,9 @@
 <h1> {{ currentUser }}, these Are Your Due Payments </h1>
 <body>
      <div>
-         <p>{% activePolicy.balance %}</p>
-         <p>{% activePolicy.payment_due_date %}</p>
-         {% if activePolicy.balance > 0 && due %}
+         <p>{{ activePolicy.balance }}</p>
+         <p>{{ activePolicy.payment_due_date }}</p>
+         {% if activePolicy.balance > 0 and due %}
          <p>Would you like to make a payment now?</p>
          <button type="button"><a href="{% url 'home:make_payment' %}">Make Payment</a></button>
          {% endif %}

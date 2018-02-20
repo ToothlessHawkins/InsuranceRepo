@@ -35,7 +35,7 @@ def logIn(request):
             if user is not None:
                 login(request,user,backend='django.contrib.auth.backends.ModelBackend')
                 if user.groups.filter(name='Customer').exists():
-                    return HttpResponseRedirect(reverse('home:customer_home_page', kwargs={'user_name': username}))
+                    return HttpResponseRedirect(reverse('home:customer_home_page'))
                 elif user.groups.filter(name='Adjuster').exists():
                     return HttpResponseRedirect(reverse('adjusters:home'))
                 elif user.groups.filter(name='ServiceRep').exists():
