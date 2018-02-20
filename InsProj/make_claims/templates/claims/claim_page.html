@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
 body {
     background-color: lightblue;
 }
@@ -10,7 +20,12 @@ body {
     <title>Claims Page</title>
 </head>
 <body>
+<ul>
+  <li><a href="{% url 'home:customer_home_page' %}">Home</a></li>
+
+</ul>
 <form>
+<br><br><br>
 <input type="button" value="Make Claim" onclick="window.location.href='http://localhost:8000/claims/create/'" />
 <select onchange="location = this.options[this.selectedIndex].value;">
     <option>View Claim</option>
@@ -30,7 +45,10 @@ body {
     <option value="http://localhost:8000/claims/status/{{ c.Claim_Id }}/">{{ c.Claim_Id }}</option>
 {% endfor %}
 </select>​
+
+
 </form>
+
 </body>
 </html>
 

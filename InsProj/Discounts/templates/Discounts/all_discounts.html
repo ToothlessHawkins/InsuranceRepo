@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
 body {
     background-color: lightblue;
 }
@@ -10,6 +19,10 @@ body {
     <title>Discounts Page</title>
 </head>
 <body>
+<ul>
+  <li><a href="{% url 'home:customer_home_page' %}">Home</a>
+</ul>
+<br><br><br>
 <input type="button" value="General Discounts" onclick="window.location.href='http://localhost:8000/discounts/view/general/discounts/'" />
 <input type="button" value="Your Discounts" onclick="window.location.href='http://localhost:8000/discounts/view/customer/discounts/'" />
 

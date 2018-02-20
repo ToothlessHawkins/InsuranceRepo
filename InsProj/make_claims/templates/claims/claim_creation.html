@@ -12,7 +12,15 @@
     padding-left: 100px;
     padding-right: 100px;
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
 
+li {
+    display: inline;
+}
 h3{
     font-size: 1em; /* 30px/16=1.875em */
  }
@@ -26,6 +34,12 @@ body {
 </head>
 
 <body>
+<ul>
+  <li><a href="{% url 'home:customer_home_page' %}">Home</a>
+  <li><a href="{% url 'make_claims:claim_page' %}">Claim Page</a></li>
+
+</ul>
+
 <div class="center">
 <h3>
 Your claim is created.

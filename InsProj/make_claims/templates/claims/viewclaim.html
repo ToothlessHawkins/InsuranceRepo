@@ -13,6 +13,15 @@ h3{
     font-size: 1.875em; /* 30px/16=1.875em */
     text-align: left;
  }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
 .center {
     text-align: center;
     width: 25%;
@@ -30,6 +39,12 @@ body {
     <title>View Claim</title>
 </head>
 <body>
+<ul>
+  <li><a href="{% url 'home:customer_home_page' %}">Home</a>
+  <li><a href="{% url 'make_claims:claim_page' %}">Claim Page</a></li>
+
+</ul>
+
 {% block content %}
     <div class="center">
         <h3>Claim Details</h3>

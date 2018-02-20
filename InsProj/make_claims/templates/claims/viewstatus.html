@@ -12,12 +12,26 @@ body{
     margin-right: 30px;
     padding: 250px 100px;
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
 </style>
 <head>
     <meta charset="UTF-8">
     <title>View Status</title>
 </head>
 <body>
+<ul>
+  <li><a href="{% url 'home:customer_home_page' %}">Home</a>
+  <li><a href="{% url 'make_claims:claim_page' %}">Claim Page</a></li>
+
+</ul>
 
 <div class="center">
     <h3>Your claim Status</h3>
