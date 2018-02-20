@@ -13,7 +13,7 @@ def view_general_discounts(request):
 
 def view_customer_specific_discounts(request):
     crnt_user = User.objects.get(username=request.user.username)
-    user = account.objects.get(user_name=request.user.username)
+    user = account.objects.get(user_name=crnt_user)
     if crnt_user.groups.filter(name='Customer').exists():
         p_i = policy.objects.get(account = user)
     #c_d = Customer_Spcific_Discounts.objects.get(Policy_Id = p_i)
@@ -49,3 +49,5 @@ def create_customer_discounts(request):
         form = Discount_Table_Form()
         return render(request, 'Discounts/create_customer_discounts.html', {'form': form})
 
+def all_discounts(request):
+    return render(request,'Discounts/all_discounts.html',{})

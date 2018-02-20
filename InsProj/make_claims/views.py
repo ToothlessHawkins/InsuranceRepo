@@ -23,7 +23,7 @@ def create_claim(request):
             data.Claim_Id = c_id
             user = User.objects.get(username=request.user.username)
             if user.groups.filter(name='Customer').exists():
-                data.Policy = policy.objects.get(user_name=account.objects.get(user_name=user))
+                data.Policy = policy.objects.get(account=account.objects.get(user_name=user))
             adjuster_availability = Adjuster.objects.filter(claim = None)
             if len(adjuster_availability) != 0:
                 data.Adjuster_obj = adjuster_availability[0].pk
@@ -36,7 +36,8 @@ def create_claim(request):
             else:
                 data.save()
                 claim_obj = Claims.objects.get(Claim_Id=c_id)
-                return HttpResponse("your claim is created. your claim id is : {}. your claim will be resolved as soon as possilbe".format(claim_obj.Claim_Id))
+                return render(request, 'claims/claim_creation.html',
+                              {'claim_id': claim_obj.Claim_Id, 'adjuster': "Your claim will be resolved as soon as poosible"})
     else:
         claim_data = ClaimForm()
         return render(request,'claims/creating_claim.html',{'claim':claim_data})
@@ -60,7 +61,7 @@ def edit_claim(request,Claim_Id):
 def main_claim(request):
     user = User.objects.get(username=request.user.username)
     if user.groups.filter(name='Customer').exists():
-        user_policy = policy.objects.get(user_name=account.objects.get(user_name=user))
+        user_policy = policy.objects.get(account=account.objects.get(user_name=user))
         claim_obj = Claims.objects.filter(Policy= user_policy)
     #claim_obj = Claims.objects.all()
         return render(request,'claims/claim_page.html',{'claim_id':claim_obj})
