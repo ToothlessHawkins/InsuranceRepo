@@ -5,10 +5,15 @@ label{
     display: inline-block;
     float: left;
     clear: left;
-    width: 40%;
+    width: 250px;
     text-align:left;
 }
+p{
+    text-align: left;
+    width: 70%
+    margin-left: 60%;
 
+}
 h3{
     font-size: 1.875em; /* 30px/16=1.875em */
     text-align: left;
@@ -18,17 +23,13 @@ ul {
     margin: 0;
     padding: 0;
 }
-p {
-    text-align: left;
-    width: 50%;
-    margin-left: 40%;
-}
+
 li {
     display: inline;
 }
 .center {
     text-align: center;
-    width: 40%;
+    width: 25%;
     display: table;
     margin-left: auto;
     margin-right: auto;
@@ -60,7 +61,9 @@ body {
                 <label>Policy Number:</label>{{ claim.Policy.policy_id }}<br>
                 <label>Claimed Date:</label>{{ claim.Claimed_Date }}<br>
                 <label>Claim Description:</label><p>{{ claim.Description }}</p><br>
-                <label>Claimed Date:</label>{{ claim.Claimed_Date }}<br>
+                {% if claim.Claim_Resolved_Date %}
+                <label>Claimed Resolved Date:</label>{{ claim.Claimed_Date }}<br>
+                {% endif %}
             </div>
 
                 <h3>  OTHER PARTY DETAILS:</h3>
