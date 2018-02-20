@@ -6,7 +6,8 @@
 <div id="content">
     <h3>{{ adjuster_details.name }}</h3>
     {% if current_case %}
-        <p>Policy Number: {{ current_case.Policy_Number }}</p>
+        <p>Claim ID: {{ current_case.Claim_Id }}</p>
+        <p>Policy Number: {{ current_case.Policy }}</p>
         <p>Date of Claim: {{ current_case.Claimed_Date }}</p>
         <p>Other Party Details:</p>
         <ul>

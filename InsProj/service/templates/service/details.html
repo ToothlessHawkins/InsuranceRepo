@@ -8,6 +8,7 @@
     <p>Request Date: {{ request.date }}</p>
     <p>Location: {{ request.location }}</p>
     <p>Description: {{ request.description }}</p>
+    <p>Vehicle: {{ request.vehicle }}</p>
     <p>Mechanic: {{ request.mechanic }}</p>
 </div>
 <form action="{% url 'service:complete_request' request.id %}" method="post">
